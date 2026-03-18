@@ -1,0 +1,6 @@
+@DownTech_HostAddress = http://localhost:5079
+
+GET {{DownTech_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
