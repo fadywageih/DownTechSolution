@@ -1,8 +1,4 @@
-﻿using Domain.Exceptions;
-using Shared.ErrorModels;
-using System.Net;
-
-namespace DownTech.MiddleWares
+﻿namespace DownTech.MiddleWares
 {
     public class GlobalErrorHandlingMiddleWare
     {

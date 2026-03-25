@@ -1,8 +1,4 @@
-﻿using Services.Specifications;
-using ServicesAbstraction;
-using Shared;
-
-namespace DownTech.Extentions
+﻿namespace DownTech.Extentions
 {
     public static class CoreServicesExstentions
     {
@@ -11,6 +7,8 @@ namespace DownTech.Extentions
             Services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
             Services.AddScoped<IServiceManager, ServiceManager>();
             Services.AddScoped<IEmailService, EmailService>();
+            Services.AddScoped<IAdminService, AdminService>();
+
             Services.AddScoped<IAuthenticationService,AuthenticationService>();
             Services.AddScoped<IExtendedImageService, ImageService>();
             Services.AddScoped<IImageService>(provider => provider.GetRequiredService<IExtendedImageService>());

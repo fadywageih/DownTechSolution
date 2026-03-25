@@ -1,8 +1,4 @@
-﻿using DownTech.Factories;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Models;
-
-namespace DownTech.Extentions
+﻿namespace DownTech.Extentions
 {
     public static class PresentationServicesExtensions
     {

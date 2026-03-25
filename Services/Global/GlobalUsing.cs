@@ -18,3 +18,6 @@ global using Microsoft.AspNetCore.Hosting;
 global using Microsoft.AspNetCore.Http;
 global using System.Text.RegularExpressions;
 global using MailKit.Security;
+global using System.Security.Cryptography;
+global using Domain.Entities.Admin;
+global using Shared.Dtos.Admin;

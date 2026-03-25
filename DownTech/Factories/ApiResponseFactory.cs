@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Shared.ErrorModels;
-using System.Net;
-
-namespace DownTech.Factories
+﻿namespace DownTech.Factories
 {
     public class ApiResponseFactory
     {

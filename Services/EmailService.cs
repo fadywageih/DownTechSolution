@@ -1,7 +1,6 @@
-﻿
-using SmtpClient = MailKit.Net.Smtp.SmtpClient;
+﻿using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
-namespace Services.Specifications
+namespace Services
 {
     public class EmailService : IEmailService
     {

@@ -3,5 +3,7 @@
     public interface IServiceManager
     {
         public IAuthenticationService AuthenticationService { get; }
+        public IAdminService AdminService { get; }
+
     }
 }

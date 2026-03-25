@@ -1,15 +1,4 @@
-﻿using Domain.Contracts;
-using Domain.Entities.Users;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Persistance.Data;
-using Persistance.Repositories;
-using Shared;
-using System.Text;
-
-namespace DownTech.Extentions
+﻿namespace DownTech.Extentions
 {
     public static class InfrastructureServicesExtensions
     {
@@ -30,11 +19,12 @@ namespace DownTech.Extentions
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
             Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+            Services.AddScoped<IAdminRepository, AdminRepository>();
 
             Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            Services.AddHttpContextAccessor();
 
-           
 
             Services.ConfigureJWT(Configuration);
 

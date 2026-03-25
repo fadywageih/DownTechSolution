@@ -20,7 +20,13 @@ namespace Persistance.Repositories
         {
             return await _dbContext.Set<TEntity>().ToListAsync();
         }
-
+        public async Task<IReadOnlyList<TEntity>> GetAllAsync(bool trackChanges)
+        {
+            var query = _dbContext.Set<TEntity>().Where(e => !e.IsDeleted);
+            return trackChanges
+                ? await query.ToListAsync()
+                : await query.AsNoTracking().ToListAsync();
+        }
         public async Task<TEntity?> GetByIdAsync(Tkey id)
         {
             return await _dbContext.Set<TEntity>().FindAsync(id);
