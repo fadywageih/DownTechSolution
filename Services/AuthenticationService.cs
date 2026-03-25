@@ -1,4 +1,4 @@
-﻿namespace Services.Specifications
+﻿namespace Services
 {
     public class AuthenticationService(UserManager<User> _userManager, IMapper _mapper
         , IOptions<JwtOptions> options,  IUnitOfWork _unitOfWork, IEmailService _emailService) : IAuthenticationService

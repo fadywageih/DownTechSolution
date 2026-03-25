@@ -1,4 +1,4 @@
-﻿namespace Services.Specifications
+﻿namespace Services
 {
     public class AssemblyReference { }
 
