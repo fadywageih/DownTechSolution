@@ -8,6 +8,7 @@
             Services.AddEndpointsApiExplorer();
             Services.AddSwaggerGen(option =>
             {
+
                 option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,

@@ -6,5 +6,8 @@ namespace Domain.Contracts
     {
         Task<int> SaveChangesAsync();
         IGenericRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : BaseEntity<TKey>;
+        IProductRepository ProductRepository { get; }
+        IUpgradeOptionRepository UpgradeOptionRepository { get; }
+        IProductUpgradeRepository ProductUpgradeRepository { get; }
     }
 }

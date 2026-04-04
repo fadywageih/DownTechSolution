@@ -11,6 +11,7 @@ namespace DownTech
             {
                 options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
             });
+            builder.Services.AddEndpointsApiExplorer();
 
             builder.Services.AddPressentionServices();
             builder.Services.AddCoreServices(builder.Configuration);

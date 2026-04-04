@@ -2,7 +2,6 @@
 {
     public class AdminProfile: Profile
     {
-        
             public AdminProfile()
             {
                 CreateMap<Admin, AdminResultDto>();
