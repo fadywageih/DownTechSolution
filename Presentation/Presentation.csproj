@@ -7,6 +7,10 @@
     <UserSecretsId>4dd3d45a-bf28-45fc-b8f4-439a1a03dd74</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.1.4" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\Services\Services.csproj" />
 		<ProjectReference Include="..\ServicesAbstraction\ServicesAbstraction.csproj" />

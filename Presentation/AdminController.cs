@@ -35,7 +35,6 @@ namespace Presentation
             return Ok(result);
         }
 
-
         [HttpPost("refresh-token")]
         [AllowAnonymous]
         public async Task<ActionResult<AdminAuthResultDto>> RefreshToken([FromBody] RefreshTokenDto refreshTokenDto)
@@ -43,6 +42,7 @@ namespace Presentation
             var result = await _serviceManager.AdminService.RefreshTokenAsync(refreshTokenDto.RefreshToken);
             return Ok(result);
         }
+
         [HttpGet("admins")]
         [Authorize(Roles = "SuperAdmin")]
         public async Task<ActionResult<IEnumerable<AdminResultDto>>> GetAllAdmins()
@@ -50,6 +50,7 @@ namespace Presentation
             var result = await _serviceManager.AdminService.GetAllAdminsAsync();
             return Ok(result);
         }
+
         [HttpGet("admins/{id}")]
         [Authorize(Roles = "SuperAdmin")]
         public async Task<ActionResult<AdminResultDto>> GetAdminById(Guid id)

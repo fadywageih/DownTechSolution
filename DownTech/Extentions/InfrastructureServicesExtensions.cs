@@ -20,6 +20,9 @@
             .AddDefaultTokenProviders();
             Services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
             Services.AddScoped<IAdminRepository, AdminRepository>();
+            Services.AddScoped<IProductRepository, ProductRepository>();
+            Services.AddScoped<IUpgradeOptionRepository, UpgradeOptionRepository>();
+            Services.AddScoped<IProductUpgradeRepository, ProductUpgradeRepository>();
 
             Services.AddScoped<IUnitOfWork, UnitOfWork>();
 

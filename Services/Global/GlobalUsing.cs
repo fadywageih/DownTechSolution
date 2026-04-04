@@ -21,3 +21,7 @@ global using MailKit.Security;
 global using System.Security.Cryptography;
 global using Domain.Entities.Admin;
 global using Shared.Dtos.Admin;
+global using Domain.Entities.Product;
+global using Shared.Dtos.Product;
+global using Shared.Enums;
+global using Microsoft.EntityFrameworkCore;
