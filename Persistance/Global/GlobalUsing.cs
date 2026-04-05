@@ -1,0 +1,18 @@
+﻿global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Domain.Entities.Product;
+global using Domain.Entities.Admin;
+global using Domain.Entities.Issue;
+global using Domain.Entities.Users;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using System.Reflection;
+global using Domain.Contracts;
+global using Persistance.Data;
+global using Domain.Entities;
+global using Shared.Dtos.Issue;
+global using Shared.Enums;
+global using System.Collections.Concurrent;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.Logging;
+

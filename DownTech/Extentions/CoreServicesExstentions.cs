@@ -1,5 +1,4 @@
-﻿
-namespace DownTech.Extentions
+﻿namespace DownTech.Extentions
 {
     public static class CoreServicesExstentions
     {
@@ -12,6 +11,7 @@ namespace DownTech.Extentions
             Services.AddScoped<IAdminService, AdminService>();
             Services.AddScoped<IProductService, ProductService>();
             Services.AddScoped<IAuthenticationService,AuthenticationService>();
+            Services.AddScoped<IIssueService, IssueService>();
 
             Services.AddScoped<IExtendedImageService, ImageService>();
             Services.AddScoped<IImageService>(provider => provider.GetRequiredService<IExtendedImageService>());

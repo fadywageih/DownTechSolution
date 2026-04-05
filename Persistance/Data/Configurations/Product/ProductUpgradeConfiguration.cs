@@ -1,8 +1,4 @@
-﻿using Domain.Entities.Product;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Persistance.Data.Configurations.Product
+﻿namespace Persistance.Data.Configurations.Product
 {
     public class ProductUpgradeConfiguration : IEntityTypeConfiguration<ProductUpgrade>
     {

@@ -1,8 +1,4 @@
-﻿using Domain.Contracts;
-using Domain.Entities.Product;
-using Microsoft.EntityFrameworkCore;
-using Persistance.Data;
-namespace Persistance.Repositories
+﻿namespace Persistance.Repositories
 {
     public class ProductUpgradeRepository : GenericRepository<ProductUpgrade, Guid>, IProductUpgradeRepository
     {

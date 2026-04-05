@@ -25,3 +25,5 @@ global using Domain.Entities.Product;
 global using Shared.Dtos.Product;
 global using Shared.Enums;
 global using Microsoft.EntityFrameworkCore;
+global using Domain.Entities.Issue;
+global using Shared.Dtos.Issue;

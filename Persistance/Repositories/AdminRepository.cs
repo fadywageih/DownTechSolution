@@ -1,8 +1,4 @@
-﻿using Domain.Contracts;
-using Domain.Entities.Admin;
-using Microsoft.EntityFrameworkCore;
-using Persistance.Data;
-
+﻿
 namespace Persistance.Repositories
 {
     public class AdminRepository : GenericRepository<Admin, Guid>, IAdminRepository

@@ -23,6 +23,7 @@
             Services.AddScoped<IProductRepository, ProductRepository>();
             Services.AddScoped<IUpgradeOptionRepository, UpgradeOptionRepository>();
             Services.AddScoped<IProductUpgradeRepository, ProductUpgradeRepository>();
+            Services.AddScoped<IIssueRepository, IssueRepository>();
 
             Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -36,6 +37,9 @@
         public static IServiceCollection ConfigureJWT(this IServiceCollection Services, IConfiguration configuration)
         {
             var jwtOptions = configuration.GetSection("JwtOptions").Get<JwtOptions>();
+
+            // Disable automatic claim type mapping to preserve custom claim names
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             Services.AddAuthentication(options =>
             {
@@ -52,7 +56,9 @@
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtOptions.Issuer,
                     ValidAudience = jwtOptions.Audience,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SecretKey))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SecretKey)),
+                    NameClaimType = JwtRegisteredClaimNames.NameId,
+                    RoleClaimType = ClaimTypes.Role
                 };
             });
             Services.AddAuthorization();

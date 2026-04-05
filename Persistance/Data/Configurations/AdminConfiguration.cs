@@ -1,8 +1,4 @@
-﻿using Domain.Entities.Admin;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Persistance.Data.Configurations
+﻿namespace Persistance.Data.Configurations
 {
     public class AdminConfiguration : IEntityTypeConfiguration<Admin>
     {

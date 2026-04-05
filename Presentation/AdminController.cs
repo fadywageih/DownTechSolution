@@ -44,7 +44,7 @@ namespace Presentation
         }
 
         [HttpGet("admins")]
-        [Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<ActionResult<IEnumerable<AdminResultDto>>> GetAllAdmins()
         {
             var result = await _serviceManager.AdminService.GetAllAdminsAsync();
@@ -52,7 +52,7 @@ namespace Presentation
         }
 
         [HttpGet("admins/{id}")]
-        [Authorize(Roles = "SuperAdmin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<ActionResult<AdminResultDto>> GetAdminById(Guid id)
         {
             var result = await _serviceManager.AdminService.GetAdminByIdAsync(id);
