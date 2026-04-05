@@ -51,6 +51,8 @@
             var JwtOptions = options.Value;
             var claims = new List<Claim>
     {
+        new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
+        new Claim("userid", user.Id.ToString()),
         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
         new Claim(ClaimTypes.Name, user.FirstName),
         new Claim(ClaimTypes.Email, user.Email),

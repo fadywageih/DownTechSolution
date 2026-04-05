@@ -1,11 +1,4 @@
-﻿
-using Domain.Entities.Admin;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Persistance.Data;
-
-namespace Persistence.Seed
+﻿namespace Persistence.Seed
 {
     public class AdminSeeder
     {

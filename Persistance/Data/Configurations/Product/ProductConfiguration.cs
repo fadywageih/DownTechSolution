@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+﻿
 namespace Persistance.Data.Configurations.Product
 {
     public class ProductConfiguration : IEntityTypeConfiguration<Domain.Entities.Product.Product>
