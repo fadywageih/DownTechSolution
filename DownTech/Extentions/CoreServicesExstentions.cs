@@ -12,6 +12,7 @@
             Services.AddScoped<IProductService, ProductService>();
             Services.AddScoped<IAuthenticationService,AuthenticationService>();
             Services.AddScoped<IIssueService, IssueService>();
+            Services.AddScoped<ISoftwareProjectService, SoftwareProjectService>();
 
             Services.AddScoped<IExtendedImageService, ImageService>();
             Services.AddScoped<IImageService>(provider => provider.GetRequiredService<IExtendedImageService>());

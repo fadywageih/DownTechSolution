@@ -15,4 +15,5 @@ global using Shared.Enums;
 global using System.Collections.Concurrent;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.Logging;
-
+global using Domain.Entities.SoftwareProject;
+global using Shared.Dtos.SoftwareProject;

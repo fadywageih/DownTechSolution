@@ -9,5 +9,6 @@ namespace Domain.Contracts
         IProductRepository ProductRepository { get; }
         IUpgradeOptionRepository UpgradeOptionRepository { get; }
         IProductUpgradeRepository ProductUpgradeRepository { get; }
+        ISoftwareProjectRepository SoftwareProjectRepository { get; }
     }
 }

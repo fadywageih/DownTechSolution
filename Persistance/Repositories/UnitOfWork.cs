@@ -7,6 +7,8 @@
         private IProductRepository? _productRepository;
         private IUpgradeOptionRepository? _upgradeOptionRepository;
         private IProductUpgradeRepository? _productUpgradeRepository;
+        private ISoftwareProjectRepository? _softwareProjectRepository;
+
 
         public UnitOfWork(ApplicationDbContext dbContext)
         {
@@ -28,6 +30,8 @@
             return (IGenericRepository<TEntity, TKey>)_repositories.GetOrAdd(typeof(TEntity).Name
                 , (_) => new GenericRepository<TEntity, TKey>(_dbContext));
         }
+        public ISoftwareProjectRepository SoftwareProjectRepository =>
+      _softwareProjectRepository ??= new SoftwareProjectRepository(_dbContext);
 
         public Task<int> SaveChangesAsync() => _dbContext.SaveChangesAsync();
     }

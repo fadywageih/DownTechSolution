@@ -24,7 +24,7 @@
             Services.AddScoped<IUpgradeOptionRepository, UpgradeOptionRepository>();
             Services.AddScoped<IProductUpgradeRepository, ProductUpgradeRepository>();
             Services.AddScoped<IIssueRepository, IssueRepository>();
-
+            Services.AddScoped<ISoftwareProjectRepository, SoftwareProjectRepository>();
             Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             Services.AddHttpContextAccessor();
@@ -38,7 +38,6 @@
         {
             var jwtOptions = configuration.GetSection("JwtOptions").Get<JwtOptions>();
 
-            // Disable automatic claim type mapping to preserve custom claim names
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             Services.AddAuthentication(options =>
