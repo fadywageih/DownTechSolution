@@ -6,5 +6,6 @@
         public IAdminService AdminService { get; }
         public IProductService ProductService { get; }
         public IIssueService IssueService { get; }
+        public ISoftwareProjectService SoftwareProjectService { get; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Persistance.Data
+﻿using Domain.Entities.SoftwareProject;
+
+namespace Persistance.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
@@ -10,6 +12,7 @@
         public DbSet<ProductUpgrade> ProductUpgrades { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Issue> Issues { get; set; }
+        public DbSet<SoftwareProject> SoftwareProjects { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

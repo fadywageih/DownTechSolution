@@ -27,3 +27,6 @@ global using Shared.Enums;
 global using Microsoft.EntityFrameworkCore;
 global using Domain.Entities.Issue;
 global using Shared.Dtos.Issue;
+global using Domain.Entities.SoftwareProject;
+global using Shared.Dtos.SoftwareProject;
+
