@@ -11,6 +11,7 @@ namespace Domain.Contracts
         Task<IReadOnlyList<Product>> GetProductsWithUpgradesAsync();
         Task<Product?> GetByNamesAsync(string nameAr, string nameEn);
         Task<IReadOnlyList<Product>> GetActiveProductsAsync();
-        Task<IReadOnlyList<Product>> GetProductsByPriceRangeAsync(decimal minPrice, decimal maxPrice);
+Task<IReadOnlyList<Product>> GetProductsByPriceRangeAsync(decimal minPrice, decimal maxPrice);
+        Task<IEnumerable<Domain.Entities.Orders.ProductRequest>> GetProductRequestsAsync();
     }
 }

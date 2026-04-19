@@ -1,4 +1,5 @@
-﻿using Domain.Entities.SoftwareProject;
+﻿using Domain.Entities.Orders;
+using Domain.Entities.SoftwareProject;
 
 namespace Persistance.Data
 {
@@ -12,7 +13,8 @@ namespace Persistance.Data
         public DbSet<ProductUpgrade> ProductUpgrades { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Issue> Issues { get; set; }
-        public DbSet<SoftwareProject> SoftwareProjects { get; set; }
+public DbSet<SoftwareProject> SoftwareProjects { get; set; }
+        public DbSet<ProductRequest> ProductRequests { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

@@ -61,10 +61,21 @@
                 .ToListAsync();
         }
 
-        public async Task<IReadOnlyList<Product>> GetProductsByPriceRangeAsync(decimal minPrice, decimal maxPrice)
+public async Task<IReadOnlyList<Product>> GetProductsByPriceRangeAsync(decimal minPrice, decimal maxPrice)
         {
             return await _context.Set<Product>()
                 .Where(p => p.BasePrice >= minPrice && p.BasePrice <= maxPrice && !p.IsDeleted)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Domain.Entities.Orders.ProductRequest>> GetProductRequestsAsync()
+        {
+            return await _context.ProductRequests
+                .Include(pr => pr.Product)
+                    .ThenInclude(p => p!.Media.Where(m => m.IsMain))
+                .Include(pr => pr.User)
+                .Where(pr => !pr.IsDeleted)
+                .OrderByDescending(pr => pr.CreatedAt)
                 .ToListAsync();
         }
     }

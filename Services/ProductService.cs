@@ -589,6 +589,22 @@
 
         #endregion
 
+        #region Product Requests
+        public async Task CreateProductRequestAsync(CreateProductRequestDto dto)
+        {
+            var request = _mapper.Map<Domain.Entities.Orders.ProductRequest>(dto);
+            request.CreatedAt = DateTime.UtcNow;
+
+            await _unitOfWork.GetRepository<Domain.Entities.Orders.ProductRequest, Guid>().AddAsync(request);
+            await _unitOfWork.SaveChangesAsync();
+        }
+        public async Task<IEnumerable<ProductRequestDto>> GetProductRequestsAsync()
+        {
+            var requests = await _unitOfWork.ProductRepository.GetProductRequestsAsync();
+            return _mapper.Map<IEnumerable<ProductRequestDto>>(requests);
+        }
+        #endregion
+
         #region Checkers
 
         public async Task<bool> IsProductExistsAsync(Guid id)
