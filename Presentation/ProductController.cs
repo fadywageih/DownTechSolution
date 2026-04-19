@@ -107,6 +107,28 @@ namespace Presentation
             return Ok(result);
         }
 
+#endregion
+
+        #region Product Requests
+
+        [HttpPost("request")]
+        [AllowAnonymous]
+        public async Task<ActionResult> CreateProductRequest([FromBody] CreateProductRequestDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            await _serviceManager.ProductService.CreateProductRequestAsync(dto);
+            return Ok(new { message = "Request created successfully" });
+        }
+
+        [HttpGet("requests")]
+        [Authorize(Roles = "SuperAdmin,Admin")]
+        public async Task<ActionResult<IEnumerable<ProductRequestDto>>> GetProductRequests()
+        {
+            var result = await _serviceManager.ProductService.GetProductRequestsAsync();
+            return Ok(result);
+        }
+
         #endregion
 
         #region Admin Operations

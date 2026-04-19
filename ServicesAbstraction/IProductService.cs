@@ -20,5 +20,7 @@ namespace ServicesAbstraction
         Task<PagedResultDto<ProductDto>> GetFilteredProductsAsync(ProductFilterDto filterDto);
         Task<bool> IsProductExistsAsync(Guid id);
         Task<bool> IsProductNameExistsAsync(string nameAr, string nameEn);
+        Task CreateProductRequestAsync(CreateProductRequestDto dto);
+        Task<IEnumerable<ProductRequestDto>> GetProductRequestsAsync();
     }
 }

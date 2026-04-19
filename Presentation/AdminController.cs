@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ServicesAbstraction;
 using Shared.Dtos.Admin;
+using Shared.Dtos.Product;
 
 namespace Presentation
 {
@@ -68,6 +69,14 @@ namespace Presentation
             return Ok(new { message = "Logged out successfully" });
         }
 
+        [HttpGet("product-requests")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
+        public async Task<ActionResult<IEnumerable<ProductRequestDto>>> GetProductRequests()
+        {
+            var result = await _serviceManager.ProductService.GetProductRequestsAsync();
+            return Ok(result);
+        }
+
         private Guid GetAdminIdFromClaims()
         {
             var adminIdClaim = User.FindFirst("admin_id")?.Value;
@@ -79,3 +88,4 @@ namespace Presentation
         }
     }
 }
+
