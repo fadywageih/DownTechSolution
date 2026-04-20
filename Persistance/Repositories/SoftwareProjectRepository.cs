@@ -37,7 +37,6 @@
                     query = query.Where(p => p.BackendType == filter.BackendType.Value);
                 }
 
-                // ✅ الآن PageNumber و PageSize من نوع int?،所以可以直接 استخدام Value
                 if (filter.PageNumber.HasValue && filter.PageSize.HasValue)
                 {
                     query = query.Skip((filter.PageNumber.Value - 1) * filter.PageSize.Value)
@@ -45,7 +44,6 @@
                 }
             }
 
-            // ✅ إضافة OrderBy
             query = query.OrderByDescending(p => p.CreatedAt);
 
             return await query.ToListAsync();
@@ -127,6 +125,13 @@
                 .GroupBy(p => p.BackendType)
                 .Select(g => new { BackendType = g.Key, Count = g.Count() })
                 .ToDictionaryAsync(x => x.BackendType, x => x.Count);
+        }
+
+        public async Task<IEnumerable<Domain.Entities.Orders.SoftwareProjectRequest>> GetSoftwareProjectRequestsAsync()
+        {
+            return await _context.Set<Domain.Entities.Orders.SoftwareProjectRequest>()
+                .Include(r => r.SoftwareProject)
+                .ToListAsync();
         }
     }
 }
