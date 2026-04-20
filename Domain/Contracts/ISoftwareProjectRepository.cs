@@ -1,7 +1,6 @@
 ﻿using Domain.Entities.SoftwareProject;
 using Shared.Dtos.SoftwareProject;
 using Shared.Enums;
-
 namespace Domain.Contracts
 {
     public interface ISoftwareProjectRepository : IGenericRepository<SoftwareProject, Guid>
@@ -13,5 +12,6 @@ namespace Domain.Contracts
         Task<Dictionary<FrontendType, int>> GetProjectsCountByFrontendTypeAsync();
         Task<Dictionary<BackendType, int>> GetProjectsCountByBackendTypeAsync();
         Task<bool> IsNameExistsAsync(string nameAr, string nameEn, Guid? excludeId = null);
+        Task<IEnumerable<Domain.Entities.Orders.SoftwareProjectRequest>> GetSoftwareProjectRequestsAsync();
     }
 }

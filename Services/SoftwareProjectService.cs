@@ -59,7 +59,7 @@
 
             // Check if name already exists
             if (await _repository.IsNameExistsAsync(createDto.NameAr, createDto.NameEn))
-                throw new ValidationException(new[] { $"Project with name '{createDto.NameEn}' already exists" });  // ✅ IEnumerable<string>
+                throw new Domain.Exceptions.ValidationException(new[] { $"Project with name '{createDto.NameEn}' already exists" });
 
             var project = _mapper.Map<SoftwareProject>(createDto);
 
@@ -68,12 +68,12 @@
             {
                 var imageUrl = await _imageService.SaveImageAsync(createDto.Image, "uploads/software");
                 if (string.IsNullOrEmpty(imageUrl))
-                    throw new ValidationException(new[] { "Failed to upload image" });  // ✅ IEnumerable<string>
+                    throw new Domain.Exceptions.ValidationException(new[] { "Failed to upload image" });
                 project.ImageUrl = imageUrl;
             }
             else
             {
-                throw new ValidationException(new[] { "Project image is required" });  // ✅ IEnumerable<string>
+                throw new Domain.Exceptions.ValidationException(new[] { "Project image is required" });
             }
 
             // Handle FrontendLibraries
@@ -103,7 +103,7 @@
 
             // Check if name already exists (excluding current project)
             if (await _repository.IsNameExistsAsync(updateDto.NameAr, updateDto.NameEn, updateDto.Id))
-                throw new ValidationException(new[] { $"Project with name '{updateDto.NameEn}' already exists" });  // ✅ IEnumerable<string>
+                throw new Domain.Exceptions.ValidationException(new[] { $"Project with name '{updateDto.NameEn}' already exists" });
 
             // Handle image update
             if (updateDto.Image != null && updateDto.Image.Length > 0)
@@ -116,7 +116,7 @@
 
                 var imageUrl = await _imageService.SaveImageAsync(updateDto.Image, "uploads/software");
                 if (string.IsNullOrEmpty(imageUrl))
-                    throw new ValidationException(new[] { "Failed to upload image" });  // ✅ IEnumerable<string>
+                    throw new Domain.Exceptions.ValidationException(new[] { "Failed to upload image" });
                 project.ImageUrl = imageUrl;
             }
 
@@ -187,6 +187,82 @@
 
         #endregion
 
+        #region Software Project Requests
+
+        public async Task CreateSoftwareProjectRequestAsync(CreateSoftwareProjectRequestDto dto)
+        {
+            _logger.LogInformation("Creating software project request for project {ProjectId}", dto.SoftwareProjectId);
+
+            var project = await _repository.GetByIdAsync(dto.SoftwareProjectId);
+            if (project == null)
+                throw new SoftwareProjectNotFoundException(dto.SoftwareProjectId);
+
+            var request = new Domain.Entities.Orders.SoftwareProjectRequest
+            {
+                Id = Guid.NewGuid(),
+                UserName = dto.UserName,
+                UserEmail = dto.UserEmail,
+PhoneNumber = string.IsNullOrWhiteSpace(dto.PhoneNumber) ? null : dto.PhoneNumber.Trim(),
+                SoftwareProjectId = dto.SoftwareProjectId,
+                Details = dto.Details,
+                Status = "Pending",
+                CreatedAt = DateTime.UtcNow
+            };
+
+            await _unitOfWork.GetRepository<Domain.Entities.Orders.SoftwareProjectRequest, Guid>().AddAsync(request);
+            await _unitOfWork.SaveChangesAsync();
+
+            _logger.LogInformation("Software project request created: {RequestId}", request.Id);
+        }
+
+        public async Task<IEnumerable<SoftwareProjectRequestDto>> GetSoftwareProjectRequestsAsync()
+        {
+            _logger.LogInformation("Getting all software project requests");
+
+            var requests = await _repository.GetSoftwareProjectRequestsAsync();
+
+            return _mapper.Map<IEnumerable<SoftwareProjectRequestDto>>(requests);
+        }
+
+        public async Task<SoftwareProjectRequestDto> GetSoftwareProjectRequestByIdAsync(Guid id)
+        {
+            _logger.LogInformation("Getting software project request by ID: {RequestId}", id);
+
+            // استخدام GetByIdAsync وبعدين نجيب الـ SoftwareProject يدوي
+            var request = await _unitOfWork.GetRepository<Domain.Entities.Orders.SoftwareProjectRequest, Guid>()
+                .GetByIdAsync(id);
+
+            if (request == null)
+                throw new RequestNotFoundException(id);
+
+            // نجيب تفاصيل المشروع المرتبط
+            if (request.SoftwareProjectId != Guid.Empty)
+            {
+                request.SoftwareProject = await _repository.GetByIdAsync(request.SoftwareProjectId);
+            }
+
+            return _mapper.Map<SoftwareProjectRequestDto>(request);
+        }
+
+        public async Task UpdateSoftwareProjectRequestStatusAsync(UpdateSoftwareProjectRequestStatusDto dto)
+        {
+            _logger.LogInformation("Updating request {RequestId} status to {Status}", dto.RequestId, dto.Status);
+
+            var request = await _unitOfWork.GetRepository<Domain.Entities.Orders.SoftwareProjectRequest, Guid>()
+                .GetByIdAsync(dto.RequestId);
+
+            if (request == null)
+                throw new RequestNotFoundException(dto.RequestId);
+
+            request.Status = dto.Status;
+            _unitOfWork.GetRepository<Domain.Entities.Orders.SoftwareProjectRequest, Guid>().Update(request);
+            await _unitOfWork.SaveChangesAsync();
+
+            _logger.LogInformation("Request status updated successfully: {RequestId}", dto.RequestId);
+        }
+
+        #endregion
+
         #region Statistics
 
         public async Task<SoftwareProjectStatisticsDto> GetStatisticsAsync()
@@ -198,7 +274,6 @@
             var projectsByBackend = await _repository.GetProjectsCountByBackendTypeAsync();
             var latestProjects = await _repository.GetLatestProjectsAsync(1);
 
-            // Convert dictionaries to string-keyed dictionaries
             var frontendStats = projectsByFrontend.ToDictionary(
                 k => GetFrontendTypeName(k.Key),
                 v => v.Value);
