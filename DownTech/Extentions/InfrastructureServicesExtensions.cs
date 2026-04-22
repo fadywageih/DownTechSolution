@@ -63,6 +63,12 @@
             Services.AddAuthorization();
             return Services;
         }
+        public static async Task ApplyMigrationsAsync(this WebApplication app)
+        {
+            using var scope = app.Services.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            await dbContext.Database.MigrateAsync();
+        }
     }
 
 }

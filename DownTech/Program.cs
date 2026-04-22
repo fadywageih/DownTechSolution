@@ -5,6 +5,10 @@ namespace DownTech
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Configuration.AddUserSecrets<Program>();
+            }
 
             #region Services
             builder.Services.ConfigureHttpJsonOptions(options =>
@@ -20,6 +24,7 @@ namespace DownTech
             #endregion
 
             var app = builder.Build();
+            await app.ApplyMigrationsAsync();
 
             app.UseCustomMiddleWare();
 
